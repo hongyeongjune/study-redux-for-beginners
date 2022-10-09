@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
 
-function Home() {
+function Home({ toDos }) {
     const [text, setText] = useState("");
     function onSubmit(e) {
         e.preventDefault();
@@ -16,9 +17,16 @@ function Home() {
                 />
                 <button>Add</button>
             </form>
-            <ul></ul>
+            <ul>
+                {JSON.stringify(toDos)}
+            </ul>
         </>
     );
 }
 
-export default Home;
+function mapStateToProps({ state }) {
+    return {
+        toDos: state
+    };
+}
+export default connect(mapStateToProps)(Home);
